@@ -18,6 +18,5 @@ namespace MyCRM.Model
         public DateTime OrderTime { get; set; }
         [JsonIgnore]
         public List<Dish> Dishes { get; set; } = new();
-
     }
 }
