@@ -87,12 +87,9 @@ namespace MyCRM
         private void AddDbContext(IServiceCollection services)
         {
             var connectionString = Configuration.GetConnectionString("local");
-  
-
             services.AddDbContext<MainDbContext>(options =>
-            options.UseSqlServer(connectionString)
-            .LogTo(Console.WriteLine, LogLevel.Information));
-
+                options.UseNpgsql(connectionString)
+                    .LogTo(Console.WriteLine, LogLevel.Information));
         }
     }
 }
