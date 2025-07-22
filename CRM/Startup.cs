@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using MyCRM.Authorize;
 using MyCRM.Database;
 using MyCRM.Repositories;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace MyCRM
 {

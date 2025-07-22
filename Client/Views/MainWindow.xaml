@@ -71,6 +71,10 @@
             <Button x:Name="AdminButton" Content="Админка" Click="MenuClick" Style="{StaticResource MenuButton}"  Tag="Page1"/>
             <Button Content="Создать заказ" Click="MenuClick"  Style="{StaticResource MenuButton}" Tag="Page2"/>
             <Button Content="Личный кабинет" Click="MenuClick"  Style="{StaticResource MenuButton}" Tag="Page3"/>
+            <Button Content="Удалить и пересоздать БД"
+                    Height="40"
+                    Margin="10"
+                    Command="{Binding MainViewModel.MigrateDatabaseCommand}" /> 
         </StackPanel>
         
         <StackPanel Grid.Column="1" Grid.Row="1">

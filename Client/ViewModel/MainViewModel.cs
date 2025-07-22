@@ -63,7 +63,7 @@ public class MainViewModel : BaseViewModel
     public TriggerCommand LoginCommand { get; set; }
     public TriggerCommand LogoutCommand { get; set; }
     public TriggerCommand EditWaiterCommand { get; set; }
-    
+    public TriggerCommand MigrateDatabaseCommand { get; set; }
 
     private MainWindow _mainWindow;
     
@@ -85,7 +85,7 @@ public class MainViewModel : BaseViewModel
         AddWaiterCommand = new TriggerCommand(HandleAddWaiter);
         AddDishCommand = new TriggerCommand(HandleAddDish);
         DeleteWaiterCommand = new TriggerCommand<object>(HandleDeleteWaiter);
-
+        MigrateDatabaseCommand = new TriggerCommand(HandleMigrateDatabase);
         EditWaiterCommand = new TriggerCommand(HandleEditWaiterCommand);
     }
 
@@ -225,6 +225,26 @@ public class MainViewModel : BaseViewModel
                 int i = Waiters.IndexOf(objToEdit);
                 Waiters[i] = responseObj;
             }
+        }
+    }
+    
+    private async void HandleMigrateDatabase()
+    {
+        try
+        {
+            var response = await _httpClient.PostAsync(_options.Host + "/api/Utility/Migrate", null);
+            if (response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("База данных успешно пересоздана!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show($"Ошибка при пересоздании базы данных: {response.ReasonPhrase}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Ошибка при пересоздании базы данных: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }
