@@ -40,7 +40,7 @@ public class MainViewModel : BaseViewModel
     
 
     public ObservableCollection<GetWaiterResponse> Waiters { get; set; } = new();
-
+    public ObservableCollection<GetIngridientResponse> Ingridients { get; set; } = new();
     public ObservableCollection<GetDishResponse> Dishes { get; set; } = new();
     
 
@@ -98,8 +98,10 @@ public class MainViewModel : BaseViewModel
             
             Waiters = await GetAllWaiters();
             Dishes = await GetAllDishes();
+            Ingridients = await GetAllIngridients();
             RaisePropertyChanged(nameof(Waiters));
             RaisePropertyChanged(nameof(Dishes));
+            RaisePropertyChanged(nameof(Ingridients));
         }
         catch (Exception e)
         {
@@ -166,6 +168,15 @@ public class MainViewModel : BaseViewModel
         return responseObj;
     }
     
+    // Получить ингридиенты
+    private async Task<ObservableCollection<GetIngridientResponse>> GetAllIngridients()
+    {
+        var response = await _httpClient.GetAsync(_options.Host + "/api/Kitchen/Ingridients");
+
+        var responseObj = await ResponseHandler.DeserializeAsync<ObservableCollection<GetIngridientResponse>>(response);
+   
+        return responseObj;
+    }
     
     
     
