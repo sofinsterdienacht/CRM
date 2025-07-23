@@ -8,6 +8,7 @@ namespace MyCRM.Responses
         public string Name { get; set; }
         public int Count { get; set; }
 
+        public GetIngridientResponse(){}
         public GetIngridientResponse(Ingridient ingridient)
         {
             IngridientId = ingridient.IngridientId;

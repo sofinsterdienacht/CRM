@@ -81,6 +81,40 @@
                 </StackPanel>
             </TabItem>
             
+             <TabItem Header="Ингридиенты">
+                
+                <StackPanel>
+                    
+                 <Button Width="150" Height="40" Margin="0 5"  HorizontalAlignment="Left" Command="{Binding OpenAddWaiterFormCommand}">Добавить Официанта </Button>
+                
+                <ListView ItemsSource="{Binding Ingridients}">
+                    
+                    <ListView.View>
+                        <GridView>
+                                <GridViewColumn Header="Название" Width="66" DisplayMemberBinding="{Binding Path=Name, Mode=TwoWay}" />
+                                <GridViewColumn Header="Количество" Width="80" DisplayMemberBinding="{Binding Path=Count, Mode=TwoWay}" />
+                                
+                            <GridViewColumn >
+                                <GridViewColumn.CellTemplate >
+                                    <DataTemplate >
+                                        <Button x:Name="EditButton" Content="Edit" Height="25" Width="40" Command="{Binding DataContext.OpenEditWaiterFormCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListView}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            
+                            <GridViewColumn >
+                                <GridViewColumn.CellTemplate >
+                                    <DataTemplate >
+                                        <Button x:Name="DeleteButton" Content="Delete" Height="25" Width="40" Command="{Binding DataContext.DeleteWaiterCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListView}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                </StackPanel>
+            </TabItem>
         </TabControl>
         
     </Grid>
